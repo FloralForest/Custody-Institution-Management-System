@@ -1,0 +1,47 @@
+# 服务端口
+server:
+    port: 8301
+
+# 服务名
+spring:
+    application:
+        name: service-vod
+    #腾讯云对象存储
+    servlet:
+        multipart:
+            max-file-size: 7168MB
+            max-request-size: 7168MB
+
+    # 环境设置：dev、test、prod
+    profiles:
+        active: dev
+
+    # mysql数据库连接
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/graduate?characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: root
+
+    #返回json的全局时间格式
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+
+#不同的服务器，地址不同
+tencent:
+    cos:
+        file:
+            region: ap-nanjing
+            secretId: 你的id
+            secretKey: 你的key
+            #bucket可以在控制台创建，也可以使用java代码创建
+            bucketName: 你的存储捅仓库
+    #腾讯云点播应用id
+    video:
+        appid: 你的id
+#mybatis日志
+mybatis-plus:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: classpath:com/tuoguan/tg/vod/mapper/xml/*.xml

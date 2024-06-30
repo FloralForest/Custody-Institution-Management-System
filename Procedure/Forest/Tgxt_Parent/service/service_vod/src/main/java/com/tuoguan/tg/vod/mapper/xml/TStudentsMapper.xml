@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tuoguan.tg.vod.mapper.TStudentsMapper">
+    <select id="selectStudentCourse" resultType="com.tuoguan.tg.vod.entity.entityDTO.StudentCourseIntelDTO">
+        SELECT t_courses.*,
+               t_classify.classify_name,
+               t_teachers.teacher_name,
+               t_teachers.`level`,
+               t_teachers.teachers_avatar,
+               t_students.id AS studentId
+        FROM t_courses
+                 INNER JOIN t_courses_students ON t_courses.id = t_courses_students.course_id
+                 INNER JOIN t_classify ON t_courses.classify_id = t_classify.id
+                 INNER JOIN t_teachers ON t_courses.teacher_id = t_teachers.id
+                 INNER JOIN t_students ON t_courses_students.student_id = t_students.id
+        WHERE t_courses_students.student_id = #{id}
+    </select>
+
+    <select id="selectStudentActivity" resultType="com.tuoguan.tg.vod.entity.entityDTO.StudentActivityIntelDTO">
+        SELECT t_activitys.*,
+               t_activity_classify.classify_name,
+               t_teachers.teacher_name,
+               t_teachers.`level`,
+               t_teachers.teachers_avatar,
+               t_students.id AS studentId
+        FROM t_activitys
+                 INNER JOIN t_activitys_students ON t_activitys.id = t_activitys_students.activity_id
+                 INNER JOIN t_activity_classify ON t_activitys.activity_classify_id = t_activity_classify.id
+                 INNER JOIN t_teachers ON t_activitys.activity_agent = t_teachers.id
+                 INNER JOIN t_students ON t_activitys_students.student_id = t_students.id
+        WHERE t_activitys_students.student_id = #{id}
+    </select>
+</mapper>

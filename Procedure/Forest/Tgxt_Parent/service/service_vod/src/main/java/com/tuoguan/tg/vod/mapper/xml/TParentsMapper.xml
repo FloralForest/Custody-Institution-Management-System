@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tuoguan.tg.vod.mapper.TParentsMapper">
+    <!--查询ta的子女-->
+    <select id="selectParentStudent" resultType="com.tuoguan.tg.vod.entity.entityDTO.ParentStudentDTO">
+        SELECT s.*,
+               s.id AS studentId
+        FROM t_students s
+                 INNER JOIN t_parents_students ps ON s.id = ps.student_Id
+        WHERE ps.parent_Id = #{id}
+    </select>
+    <!--    &lt;!&ndash;查询ta的所有信息以及其子女&ndash;&gt;-->
+    <!--    <select id="selectParentStudentALL" resultType="com.tuoguan.tg.vod.entity.entityDTO.ParentStudentDTO">-->
+    <!--        SELECT t_parents.*, t_students.*-->
+    <!--        FROM t_parents-->
+    <!--                 INNER JOIN t_parents_students ON t_parents.id = t_parents_students.parent_id-->
+    <!--                 INNER JOIN t_students ON t_parents_students.student_id = t_students.id;-->
+    <!--    </select>-->
+</mapper>

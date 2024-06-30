@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tuoguan.tg.vod.mapper.TCoursesMapper">
+    <select id="selectCourseStudent" resultType="com.tuoguan.tg.vod.entity.entityDTO.CourseStudentDTO">
+        SELECT t_students.*
+        FROM t_students
+                 INNER JOIN t_courses_students ON t_students.id = t_courses_students.student_id
+        WHERE t_courses_students.course_id = #{id}
+    </select>
+    <!--课程的评论-->
+    <select id="selectEvaluate" resultType="com.tuoguan.tg.vod.entity.entityDTO.CourseEvaluateDTO">
+        SELECT t_courses.*, t_course_evaluate.*, t_users.username,
+               t_course_evaluate.id AS evaluateId,
+               t_course_evaluate.create_time AS createEvaluateTime,
+               t_course_evaluate.update_time AS updateEvaluateTime
+        FROM t_courses
+                 INNER JOIN t_course_evaluate ON t_courses.id =  t_course_evaluate.course_id
+                 INNER JOIN t_users ON t_course_evaluate.people_id = t_users.id
+        WHERE t_courses.id = #{id} AND t_course_evaluate.is_deleted = 0
+    </select>
+</mapper>

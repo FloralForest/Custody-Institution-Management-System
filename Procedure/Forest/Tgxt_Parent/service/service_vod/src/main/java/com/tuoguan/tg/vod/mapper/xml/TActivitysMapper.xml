@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tuoguan.tg.vod.mapper.TActivitysMapper">
+    <select id="selectActivityStudent" resultType="com.tuoguan.tg.vod.entity.entityDTO.ActivityStudentDTO">
+        SELECT t_students.*
+        FROM t_students
+                 INNER JOIN t_activitys_students ON t_students.id = t_activitys_students.student_id
+        WHERE t_activitys_students.activity_id = #{id}
+    </select>
+</mapper>
